@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>BreakJS | Javascript Breakout-style Game</title>
+		<meta author="Kevin Coughlin"></meta>
+		<meta description="Breakout-style game made in Javascript"></meta>
+		<style>
+			body{
+				background-image: URL('./images/ios-linen.jpg')
+			}
+			canvas {
+				margin-left: 20px;
+				width: 400px;
+				height: 600px;
+				background-color: #000000;
+				border-left: 12px solid #FFFFFF;
+				border-top: 12px solid #FFFFFF;
+				border-right: 12px solid #FFFFFF;
+				cursor: none;
+			}
+		</style>
+	</head>
+	<body onload="init();">
+		<canvas id="canvas"></canvas>
+
+		<br/>
+
+		<span style="color: #FFFFFF;">Score: <span id="score"></score></span><br/>
+		<span style="color: #FFFFFF;">Lives: <span id="lives"></score></span><br/>
+
+		<h2>BreakJS - Breakout-style JavaScript Game</h2>
+		<p>Begin the game by click in the canvas. The ball we begin moving. Reflect the ball off your paddle in the hopes of hitting the bricks to make them disappear. Each brick that is hit will reward you with points. The game ends when all of the bricks are gone</p>
+		<footer>
+			<p>
+				<small>2012 - Kevin Coughlin - <a href="twitter.com/kevintcoughlin">@kevintcoughlin</a></small>
+			</p>
+			<p>
+				<small>Disclaimer- This game was made in less than 16 hours... I plan to add, improve, extend it within the coming days. I made it to prove to myself that I could create it within a day. I hope to include a tutorial soon that goes through the process step-by-step.</small>
+			</p>
+		</footer>
+		<!-- jQuery and Game files -->
+		<script src="./scripts/jquery-1.7.2.min.js"></script>
+		<script src="./scripts/game.js"></script>
+	</body>
+</html>
