@@ -35,6 +35,10 @@ var rows = 4; 						// Number of Rows of Bricks
 var columns = 5; 					// Number of Columns of Bricks
 var brick_height = 5;
 
+// Audio
+var paddleSound = new Audio("./sounds/BlipHighPitch.wav");
+var brickSound = new Audio("./sounds/BonkLowPitch.wav");
+
 // Breakout Brick Object
 function brick(){
 	this.width = 50; 				// Brick Width
@@ -212,6 +216,7 @@ function detectCollision(){
 		for(var i = 0; i < bricks.length; i++){
 			if(pongBall.y <= bricks[i].y+bricks[i].height){
 				if(pongBall.x >= bricks[i].x && pongBall.x <= bricks[i].x+bricks[i].width){
+					brickSound.play(); 	// Play ball hit brick sound
 					bricks.splice(i, 1); 	// Remove affected brick
 					score += 50;			// Add 50 points to score
 					pongBall.vy *= -1; 		// Reverse Y-velocity
@@ -238,6 +243,7 @@ function detectCollision(){
 	}
 	if(pongBall.x >= player.x && pongBall.x <= player.x+player.width){
 		if(pongBall.y+pongBall.height >= player.y){
+			paddleSound.play(); // Play ball hit paddle sound
 			pongBall.vy *= -1;
 		}
 	}
