@@ -60,6 +60,9 @@ function paddle(){
 	this.color = "#FFFFFF";
 }
 
+// Initialize Player Paddle
+var player = new paddle();
+
 // Ball Object
 function ball(x, y){
 	this.x = x;
@@ -72,14 +75,20 @@ function ball(x, y){
 	this.color = "#FFFFFF";
 }
 
+// On click, begin moving ball
+$('canvas').click(function(){
+	if(!ball_lock){
+		ball_lock = true;
+		pongBall.vx = 1.75; 	// X-velocity
+		pongBall.vy = 1.75; 	// Y-velocity
+	}
+});
+
 // Draw the Ball Object
 function drawBall(){
 	ctx.fillStyle = pongBall.color;
 	ctx.fillRect(pongBall.x, pongBall.y, pongBall.width, pongBall.height);
 }
-
-// Initialize Player Paddle
-var player = new paddle();
 
 // Get Mouse position relative to canvas
 function getMousePos(canvas, evt){
@@ -123,15 +132,6 @@ function init(){
 		}
 	});
 }
-
-// On click, begin moving ball
-$('canvas').click(function(){
-	if(!ball_lock){
-		ball_lock = true;
-		pongBall.vx = 1.75; 	// X-velocity
-		pongBall.vy = 1.75; 	// Y-velocity
-	}
-});
 
 // This is where the Bricks get naughty
 function populateBricks(){
@@ -243,7 +243,20 @@ function detectCollision(){
 	}
 	if(pongBall.x >= player.x && pongBall.x <= player.x+player.width){
 		if(pongBall.y+pongBall.height >= player.y){
+
+			// Modify X-direction of Ball
+			var ball_modifier = 1;
+
+			// So that pongball doesn't get velocity X of Zero
+			if(pongBall.x > (player.x+player.width)/2){
+				// Change ball X velocity depending on where it hits on paddle
+				ball_modifier = (pongBall.x - player.x)*.04;
+			} else if(pongBall.x < (player.x+player.width)/2){
+				ball_modifier = -(pongBall.x - player.x)*.04;
+			}
+
 			paddleSound.play(); // Play ball hit paddle sound
+			pongBall.vx *= ball_modifier;
 			pongBall.vy *= -1;
 		}
 	}
